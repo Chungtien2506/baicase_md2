@@ -14,13 +14,15 @@ public class MainStudent {
 
     public void mainStudent(String acc) {
         while (true) {
+            System.out.println("                         STUDENT                         ");
             System.out.println("|========================================================|");
             System.out.println("|1.Đổi Mật Khẩu                                          |");
             System.out.println("|2.Đăng Ký Môn Học(Nhập tên muốn đăng kí)                |");
             System.out.println("|3.Danh Sách Môn Học                                     |");
             System.out.println("|4.Số tiền bạn phải trả cho số tín chỉ đăng kí kì này là |");
             System.out.println("|5.Hiển thị danh sách môn học kì này bạn đã đăng kí      |");
-            System.out.println("|6.Đăng Xuất                                             |");
+            System.out.println("|6.Xóa môn học bạn đã đăng kí                            |");
+            System.out.println("|7.Đăng Xuất                                             |");
             System.out.println("|========================================================|");
             try {
                 int choie = Integer.parseInt(scanner.nextLine());
@@ -41,6 +43,9 @@ public class MainStudent {
                         managerSubjects.showRegisteredCourses(acc);
                         break;
                     case 6:
+                        managerSubjects.deleteRemove(acc);
+                        break;
+                    case 7:
                         return;
 
                 }

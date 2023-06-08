@@ -86,6 +86,11 @@ public class Student  implements Serializable {
         SaveSubjects.add(subject);
     }
 
+    //test
+    public void  deleteSubject(Subject subject){
+        SaveSubjects.remove(subject);
+    }
+
     @Override
     public String toString() {
         return "Student{" +

@@ -14,19 +14,33 @@ public class ManagerSubjects extends ManagerStudent {
     static List<Student> students = new ArrayList<>();
     static ArrayList<Subject> subjectsList = (ArrayList<Subject>) WriteAndReadSubject.read();
 // Thêm môn học
-    public void addSubject() {
-        System.out.println("Nhập số tín chỉ của môn học");
-        int id = Integer.parseInt(scanner.nextLine());
-        System.out.println("Nhập tên môn học");
-        String name = scanner.nextLine();
+public void addSubject() {
+    System.out.println("Nhập số tín chỉ của môn học");
+    int id = Integer.parseInt(scanner.nextLine());
+    System.out.println("Nhập tên môn học");
+    String name = scanner.nextLine();
+
+    // Kiểm tra xem môn học có trùng tên không
+    boolean isDuplicate = false;
+    for (Subject sb : subjectsList) {
+        if (sb.getName().equals(name)) {
+            isDuplicate = true;
+            break;
+        }
+    }
+
+    if (isDuplicate) {
+        System.out.println("Môn học đã tồn tại trong danh sách.");
+    } else {
         System.out.println("Thêm môn học thành công");
         int price = id * 500000;
         Subject subject = new Subject(id, name, price);
         subjectsList.add(subject);
         WriteAndReadSubject.write(subjectsList);
-
     }
-// Check tên môn học
+}
+
+    // Check tên môn học
     public int checkNamesubject(String nameSubject) {
         for (int i = 0; i < subjectsList.size(); i++) {
             if (nameSubject.equals(subjectsList.get(i).getName())) {
@@ -126,7 +140,48 @@ public class ManagerSubjects extends ManagerStudent {
         }
     }
 
-// Tổng tiền và tổng số tín chỉ
+    // Xóa môn học
+    public void deleteRemove(String acc) {
+        System.out.println("Chọn môn học muốn xóa");
+        String name = scanner.nextLine();
+        int temp = -1; // Khởi tạo giá trị ban đầu cho biến temp
+
+        for (int i = 0; i < studentsList.size(); i++) {
+            if (studentsList.get(i).getAcc().equals(acc)) {
+                temp = i;
+                break; // Thêm break để dừng vòng lặp khi tìm thấy sinh viên
+            }
+        }
+
+        if (temp != -1) { // Kiểm tra xem sinh viên có tồn tại trong danh sách không
+            boolean isRegistered = false; // Khởi tạo biến để kiểm tra môn học đã được đăng ký hay chưa
+            boolean isSubjectFound = false; // Khởi tạo biến để kiểm tra xem có môn học trùng khớp không
+
+            List<Subject> saveSubjects = studentsList.get(temp).getSaveSubjects();
+            for (int i = 0; i < saveSubjects.size(); i++) {
+                Subject sb = saveSubjects.get(i);
+                if (sb.getName().equals(name)) {
+                    isRegistered = true;
+                    saveSubjects.remove(i); // Xóa môn học khỏi danh sách saveSubjects
+                    System.out.println("Xóa thành công!");
+                    WriteAndReadSubject.write(subjectsList);
+                    WriteAndRead.write(studentsList);
+                    break; // Thêm break để dừng vòng lặp khi xóa thành công
+                }
+            }
+
+            if (!isRegistered) {
+                System.out.println("Bạn chưa đăng ký môn học này.");
+            }
+        } else {
+            System.out.println("Không tìm thấy sinh viên. Vui lòng thử lại.");
+        }
+    }
+
+
+
+
+    // Tổng tiền và tổng số tín chỉ
     public void sumPrice(String acc) {
         int sum = 0;
         int sum1 = 0;

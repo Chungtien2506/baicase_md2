@@ -14,6 +14,7 @@ public class MainAdmin {
    public  void addMainAdmin(){
        try {
            while (true) {
+               System.out.println("                 ADMIN                ");
                System.out.println("|=====================================|");
                System.out.println("|1. Đăng Kí Sinh Viên                 |");
                System.out.println("|2. Xoá Sinh Viên                     |");
